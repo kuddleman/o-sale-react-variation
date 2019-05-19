@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new
+    if current_user
+      flash[:notice] = "You have already signed up"
+      redirect_to root_path
+    else
+      @user = User.new
+    end   
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
+      cookies.signed[:user_id] = @user.id
       flash[:notice] = "Signed up successfully"
       redirect_to root_path
     else
