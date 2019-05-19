@@ -6,7 +6,7 @@
           </h1>
 
             <div class="form-body-style px-5 pt-4">
-              <%= form_with url: signin_path do |f| %>
+              <%= form_with url: signin_path, local: true do |f| %>
                 <div class="form-group row">
                   <div class="col-md-2 col-form-label">
                     <%= f.label :email %>
