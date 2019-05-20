@@ -11,9 +11,6 @@
               Home <span class="sr-only">(current)</span>
             <% end %>
           </li>
-          <li class="nav-item">
-            <%= link_to "New Product", new_product_path, class: "nav-link" %>
-          </li>
 
           <% unless current_user %>
             <li class="nav-item">
@@ -23,6 +20,9 @@
               <%= link_to "Sign Up", signup_path, class: "nav-link" %>
             </li>
           <% else %>
+            <li class="nav-item">
+              <%= link_to "New Product", new_product_path, class: "nav-link" %>
+            </li>
             <li class="nav-item">
               <%= link_to "Sign Out", session_path, method: :delete, class: "nav-link" %>
             </li>
