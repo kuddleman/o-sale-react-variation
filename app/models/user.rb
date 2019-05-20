@@ -13,6 +13,10 @@ class User < ApplicationRecord
 
   before_save :downcase_email
 
+  def fullname
+    "#{first_name} #{last_name}"
+  end
+
   private
 
   def downcase_email
