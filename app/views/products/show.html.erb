@@ -39,4 +39,9 @@
       <% end %>
     </div>
   </div>
+
+  <%= 
+    render partial: 'comments/form',
+    locals: { product: @product, comment: @comment } 
+  %>
 </div>

@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @comment = @product.comments.build
   end
 
   def new
