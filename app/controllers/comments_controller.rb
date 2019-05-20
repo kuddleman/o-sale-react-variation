@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
       flash[:notice] = "Comment has been created"
       redirect_to @product
     else
+      @comments = @product.comments
       flash.now[:alert] = "Comment has not been created"
       render 'products/show'
     end

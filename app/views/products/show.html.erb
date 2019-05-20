@@ -50,7 +50,9 @@
       <h2 class="comment-header">Customer comments (3)</h2>
     </div>
 
-    <%= render partial: 'comments/comment', object: comment %>
+    <% @comments.reject { |cmt| cmt.new_record? }.each do |comment|%>
+      <%= render partial: 'comments/comment', object: comment %>
+    <% end %>
    
   </div>
 </div>
