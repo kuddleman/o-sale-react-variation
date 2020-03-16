@@ -2,13 +2,18 @@
   "name": "o_sale",
   "private": true,
   "dependencies": {
+    "@babel/preset-react": "^7.8.3",
     "@rails/actioncable": "^6.0.0-alpha",
     "@rails/activestorage": "^6.0.0-alpha",
     "@rails/ujs": "^6.0.0-alpha",
     "@rails/webpacker": "^4.0.2",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
     "popper": "^1.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",

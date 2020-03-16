@@ -11,7 +11,15 @@ require("channels")
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../../stylesheets/custom.css"
 
+import React from 'react'
+import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
+import App from '../containers/App'
 
+document.addEventListener('DOMContentLoaded', () => {
+  const root = document.getElementById('root')
+  ReactDOM.render(<App />, root)
+})
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
