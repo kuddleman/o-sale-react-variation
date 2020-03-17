@@ -12,6 +12,14 @@ class NewProductForm extends Component {
       quantity: '',
       errors: {}
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    console.log("I have SUBMITTED!")
+    console.log(this.state)
   }
 
   render() {
@@ -27,7 +35,7 @@ class NewProductForm extends Component {
             </h1>
 
             <div className="form-body-style px-5 pt-4">
-              <form>
+              <form className="form-horizontal" onSubmit={ this.handleSubmit }>
                 <div className="form-group row">
                   <label 
                     htmlFor="name" 
