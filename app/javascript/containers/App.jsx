@@ -12,7 +12,7 @@ const App = () => (
       <Header />
       <Switch>
         <Route exact path='/' component={ ProductList }/>
-        <Route path='/detail' component={ ProductDetail } />
+        <Route path='/products/:id' component={ ProductDetail } />
 
         <Route render={() => (
           <div className="container">
