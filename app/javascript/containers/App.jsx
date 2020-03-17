@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 
 import Header from '../components/shared/Header'
 import Jumbotron from '../components/products/Jumbotron'
@@ -11,7 +11,9 @@ const App = () => (
     <React.Fragment>
       <Header />
       <Jumbotron />
-      <ProductList />
+      <Route exact path='/' component={ ProductList }/>
+      <Route path='/jumbo' component={ Jumbotron }/>
+      <Route path='/jumbo/tron' component={ Jumbotron }/>
       <Footer />
     </React.Fragment>
   </BrowserRouter>
