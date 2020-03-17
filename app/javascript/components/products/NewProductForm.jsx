@@ -14,12 +14,18 @@ class NewProductForm extends Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleSubmit(event) {
     event.preventDefault()
     console.log("I have SUBMITTED!")
     console.log(this.state)
+  }
+
+  handleChange(event) {
+    this.setState( { [event.target.name] : event.target.value } )
+    
   }
 
   render() {
@@ -46,6 +52,8 @@ class NewProductForm extends Component {
                     <input 
                       type="text"  
                       name="name" 
+                      value={ this.state.name }
+                      onChange={ this.handleChange }
                       id="name" 
                       className="form-control" 
                       placeholder="Item name" 
