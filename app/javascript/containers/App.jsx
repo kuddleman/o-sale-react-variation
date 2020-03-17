@@ -2,8 +2,8 @@ import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Header from '../components/shared/Header'
-import Jumbotron from '../components/products/Jumbotron'
 import ProductList from './ProductsContainer'
+import ProductDetail from './ProductDetailContainer'
 import Footer from '../components/shared/Footer'
 
 const App = () => (
@@ -12,7 +12,8 @@ const App = () => (
       <Header />
       <Switch>
         <Route exact path='/' component={ ProductList }/>
-        
+        <Route path='/detail' component={ ProductDetail } />
+
         <Route render={() => (
           <div className="container">
             <div className="row">
