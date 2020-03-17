@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Header from '../components/shared/Header'
 import ProductList from './ProductsContainer'
 import ProductDetail from './ProductDetailContainer'
+import NewProductForm from '../components/products/NewProductForm'
 import Footer from '../components/shared/Footer'
 
 const App = () => (
@@ -13,7 +14,7 @@ const App = () => (
       <Switch>
         <Route exact path='/' component={ ProductList }/>
         <Route path='/products/:id' component={ ProductDetail } />
-
+        <Route path='/newProduct' component={NewProductForm}/>
         <Route render={() => (
           <div className="container">
             <div className="row">
