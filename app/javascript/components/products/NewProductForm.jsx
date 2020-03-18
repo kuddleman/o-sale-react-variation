@@ -1,31 +1,69 @@
 import React, { Component } from 'react'
 
 class NewProductForm extends Component {
-
-  constructor(props) {
-    super(props)
-
-    this.state= {
+    state= {
       name: '',
       description: '',
       price: '',
       quantity: '',
       errors: {}
     }
-
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleSubmit(event) {
-    event.preventDefault()
-    console.log("I have SUBMITTED!")
-    console.log(this.state)
-  }
-
-  handleChange(event) {
-    this.setState( { [event.target.name] : event.target.value } )
     
+  handleSubmit = event  => {
+    event.preventDefault()
+
+    const { name, description, price, quantity} = this.state
+
+    const newProduct = {
+      name,
+      description,
+      price,
+      quantity
+    }
+    this.props.onSubmit( newProduct )
+    this.setState({
+      name: '',
+      price: '',
+      description: '',
+      quantity: '',
+      errors: {}
+    })
+    
+  }
+
+  handleChange = event => {
+    this.setState( { [event.target.name] : event.target.value } )  
+  }
+
+  checkErrors = ( state, fieldName ) => {
+    const error = {}
+
+    switch (fieldName) {
+      case 'name':
+        if (!state.name) {
+          error.name = 'Please provide a name'
+        }
+        break
+      case 'description':
+        if (!state.description) {
+          error.description = 'Please provide a description'
+        }
+        break 
+      case 'price':
+        if (parseFloat(state.price) <= 0.0 ||
+            !state.price.toString().match(/^\d{1,}(\.\d{0,2})?$/)) {
+          error.price = 'Price has to be a positive number'
+        }
+        break 
+      case 'price':
+        if (parseInt(state.quantity, 10) <= 0 ||
+            !state.quantity.toString().match(/^\d{1,}$/)) {
+          error.message = 'Quantity has to be a positive whole number'
+        }
+        break          
+    }
+
+    return error
   }
 
   render() {
@@ -68,6 +106,8 @@ class NewProductForm extends Component {
                     <input 
                       type="text" 
                       name="price" 
+                      value={ this.state.price }
+                      onChange={ this.handleChange }
                       id="price" 
                       className="form-control" 
                       placeholder="Item price" 
@@ -76,12 +116,32 @@ class NewProductForm extends Component {
                 </div>
 
                 <div className="form-group row">
+                  <label htmlFor="quantity" className="col-md-3 col-form-label">
+                    Quantity
+                  </label>
+                  <div className="col-md-9">
+                    <input 
+                      type="number" 
+                      name="quantity" 
+                      value={ this.state.quantity }
+                      onChange={ this.handleChange }
+                      id="quantity" 
+                      className="form-control" 
+                      placeholder="Item quantity" 
+                    />
+                  </div>
+                </div>
+
+
+                <div className="form-group row">
                   <label htmlFor="description" className="col-md-3 col-form-label">
                     Description
                   </label>
                   <div className="col-md-9">
                     <textarea 
                       name="description" 
+                      value={ this.state.description }
+                      onChange={ this.handleChange }
                       id="description" 
                       className="form-control" 
                       placeholder="Item description here" 
