@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import { inputClasses} from '../../shared/helpers'
 
 class NewProductForm extends Component {
     state= {
@@ -26,7 +29,7 @@ class NewProductForm extends Component {
       price: '',
       description: '',
       quantity: '',
-      errors: {}
+      
     })
     
   }
@@ -35,36 +38,43 @@ class NewProductForm extends Component {
     this.setState( { [event.target.name] : event.target.value } )  
   }
 
-  checkErrors = ( state, fieldName ) => {
-    const error = {}
+  // checkErrors = ( state, fieldName ) => {
+  //   const error = {}
 
-    switch (fieldName) {
-      case 'name':
-        if (!state.name) {
-          error.name = 'Please provide a name'
-        }
-        break
-      case 'description':
-        if (!state.description) {
-          error.description = 'Please provide a description'
-        }
-        break 
-      case 'price':
-        if (parseFloat(state.price) <= 0.0 ||
-            !state.price.toString().match(/^\d{1,}(\.\d{0,2})?$/)) {
-          error.price = 'Price has to be a positive number'
-        }
-        break 
-      case 'price':
-        if (parseInt(state.quantity, 10) <= 0 ||
-            !state.quantity.toString().match(/^\d{1,}$/)) {
-          error.message = 'Quantity has to be a positive whole number'
-        }
-        break          
-    }
+  //   switch (fieldName) {
+  //     case 'name':
+  //       if (!state.name) {
+  //         error.name = 'Please provide a name'
+  //       }
+  //       break
+  //     case 'description':
+  //       if (!state.description) {
+  //         error.description = 'Please provide a description'
+  //       }
+  //       break 
+  //     case 'price':
+  //       if (parseFloat(state.price) <= 0.0 ||
+  //           !state.price.toString().match(/^\d{1,}(\.\d{0,2})?$/)) {
+  //         error.price = 'Price has to be a positive number'
+  //       }
+  //       break 
+  //     case 'price':
+  //       if (parseInt(state.quantity, 10) <= 0 ||
+  //           !state.quantity.toString().match(/^\d{1,}$/)) {
+  //         error.message = 'Quantity has to be a positive whole number'
+  //       }
+  //       break          
+  //   }
 
-    return error
-  }
+  //   return error
+  // }
+
+  // handleBlur = event => {
+  //   const { name } = event.target
+  //   const fieldError = this.checkErrors(this.state, name)
+  //   const errors = Object.assign({}, this.state.errors, fieldError)
+  //   this.setState({errors})
+  // }
 
   render() {
     const buttonText = "Create Product"
@@ -92,11 +102,18 @@ class NewProductForm extends Component {
                       name="name" 
                       value={ this.state.name }
                       onChange={ this.handleChange }
+                      // onBlur={ this.handleBlur }
                       id="name" 
-                      className="form-control" 
+                      className={inputClasses("name", this.state )} 
                       placeholder="Item name" 
                       autoFocus={ true } 
                     />
+                      
+                        {/* {this.state.erros.name ? 
+                          <div className="invalid-feedback">
+                          {this.state.errors.name}
+                        </div> : null
+                        } */}
                   </div>
                 </div>
 
@@ -108,6 +125,7 @@ class NewProductForm extends Component {
                       name="price" 
                       value={ this.state.price }
                       onChange={ this.handleChange }
+                      // onBlur={ this.handleBlur }
                       id="price" 
                       className="form-control" 
                       placeholder="Item price" 
@@ -125,6 +143,7 @@ class NewProductForm extends Component {
                       name="quantity" 
                       value={ this.state.quantity }
                       onChange={ this.handleChange }
+                      // onBlur={ this.handleBlur }
                       id="quantity" 
                       className="form-control" 
                       placeholder="Item quantity" 
@@ -142,6 +161,7 @@ class NewProductForm extends Component {
                       name="description" 
                       value={ this.state.description }
                       onChange={ this.handleChange }
+                      // onBlur={ this.handleBlur }
                       id="description" 
                       className="form-control" 
                       placeholder="Item description here" 
