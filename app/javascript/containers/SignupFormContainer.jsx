@@ -60,7 +60,7 @@ class Signup extends Component {
                 onChange={ this.handleChange }
                 placeholder="Your first name"
                 autoFocus={ true }
-                state="this.state"
+                state={this.state}
               />
               <Input 
                 title="Last Name"
@@ -70,7 +70,7 @@ class Signup extends Component {
                 onChange={ this.handleChange }
                 placeholder="Your last name"
                 autoFocus={ false }
-                state="this.state"
+                state={this.state}
               />
               <Input 
                 title="Email"
@@ -80,7 +80,7 @@ class Signup extends Component {
                 onChange={ this.handleChange }
                 placeholder="Your email address"
                 autoFocus={ false }
-                state="this.state"
+                state={this.state}
               />
               <Input 
                 title="Password"
@@ -90,7 +90,7 @@ class Signup extends Component {
                 onChange={ this.handleChange }
                 placeholder="Your password"
                 autoFocus={ false }
-                state="this.state"
+                state={this.state}
               />
               <Button>Sign Up</Button>
             </SignUpForm>
