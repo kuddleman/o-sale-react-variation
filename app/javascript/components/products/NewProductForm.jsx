@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { inputClasses} from '../../shared/helpers'
+import Input from '../shared/Input'
+import TextArea from '../shared/TextArea'
+import Button from '../shared/Button'
 
 class NewProductForm extends Component {
     state= {
@@ -35,7 +38,9 @@ class NewProductForm extends Component {
   }
 
   handleChange = event => {
-    this.setState( { [event.target.name] : event.target.value } )  
+    const { name, value } = event.target
+    this.setState({ [name]: value })
+    //this.setState( { [event.target.name] : event.target.value } )  
   }
 
   // checkErrors = ( state, fieldName ) => {
@@ -90,111 +95,67 @@ class NewProductForm extends Component {
 
             <div className="form-body-style px-5 pt-4">
               <form className="form-horizontal" onSubmit={ this.handleSubmit }>
-                <div className="form-group row">
-                  <label 
-                    htmlFor="name" 
-                    className="col-md-3 col-form-label">
-                    Name
-                  </label>
-                  <div className="col-md-9">
-                    <input 
-                      type="text"  
-                      name="name" 
-                      value={ this.state.name }
-                      onChange={ this.handleChange }
-                      // onBlur={ this.handleBlur }
-                      id="name" 
-                      className={inputClasses("name", this.state )} 
-                      placeholder="Item name" 
-                      autoFocus={ true } 
-                    />
-                      
-                        {/* {this.state.erros.name ? 
-                          <div className="invalid-feedback">
-                          {this.state.errors.name}
-                        </div> : null
-                        } */}
-                  </div>
-                </div>
+                <Input
+                  title="Name"
+                  type="text"
+                  name="name"
+                  value={ this.state.name }
+                  //onChange={ event => this.handleChange(event) }
+                  onChange={ this.handleChange }
+                  placeholder="Item name"
+                  autoFocus={ true }
+                  state={ this.state }
+                />
 
-                <div className="form-group row">
-                  <label htmlFor="price" className="col-md-3 col-form-label">Price</label>
-                  <div className="col-md-9">
-                    <input 
-                      type="text" 
-                      name="price" 
-                      value={ this.state.price }
-                      onChange={ this.handleChange }
-                      // onBlur={ this.handleBlur }
-                      id="price" 
-                      className="form-control" 
-                      placeholder="Item price" 
-                    />
-                  </div>
-                </div>
+                <Input
+                  title="Price"
+                  type="text"
+                  name="price"
+                  value={ this.state.price }
+                  onChange={ this.handleChange }
+                  placeholder="Item price"
+                  autoFocus={ false }
+                  state={ this.state }
+                />
 
-                <div className="form-group row">
-                  <label htmlFor="quantity" className="col-md-3 col-form-label">
-                    Quantity
-                  </label>
-                  <div className="col-md-9">
-                    <input 
-                      type="number" 
-                      name="quantity" 
-                      value={ this.state.quantity }
-                      onChange={ this.handleChange }
-                      // onBlur={ this.handleBlur }
-                      id="quantity" 
-                      className="form-control" 
-                      placeholder="Item quantity" 
-                    />
-                  </div>
-                </div>
+                <TextArea
+                  title="Description"
+                  name="description"
+                  value={ this.state.description }
+                  rows="5"
+                  onChange={ this.handleChange }
+                  placeholder="Item description"
+                  autoFocus={ false }
+                  state={ this.state }
+                />
+
+                <Input
+                  title="Quantity"
+                  type="number"
+                  name="quantity"
+                  value={ this.state.quantity }
+                  onChange={ this.handleChange }
+                  placeholder="Item quantity"
+                  autoFocus={ false }
+                  state={ this.state }
+                />
+
+                <Input
+                  title="Image"
+                  type="file"
+                  name="image"
+                  value={ this.state.image }
+                  onChange={ this.handleChange }
+                  placeholder="Item image"
+                  autoFocus={ false }
+                  state={ this.state }
+                />
+
+                <Button>
+                   { buttonText }
+                </Button>
 
 
-                <div className="form-group row">
-                  <label htmlFor="description" className="col-md-3 col-form-label">
-                    Description
-                  </label>
-                  <div className="col-md-9">
-                    <textarea 
-                      name="description" 
-                      value={ this.state.description }
-                      onChange={ this.handleChange }
-                      // onBlur={ this.handleBlur }
-                      id="description" 
-                      className="form-control" 
-                      placeholder="Item description here" 
-                      rows="5">
-                    </textarea>
-                  </div>
-                </div>
-
-                <div className="form-group row">
-                  <label 
-                    htmlFor="image" 
-                    className="col-md-3 col-form-label">
-                      Image
-                  </label>
-                  <div className="col-md-9">
-                    <input 
-                      type="file" 
-                      name="image" 
-                      id="image" 
-                      className="form-control"  
-                    />
-                  </div>
-                </div>
-
-                <div className="form-group row">
-                  <div className="col-md-9 offset-md-3">
-                    <input 
-                      type="submit" 
-                      className="btn btn-outline-purple" 
-                      value={ buttonText } 
-                    />
-                  </div>
-                </div>
 
               </form>
             </div>
