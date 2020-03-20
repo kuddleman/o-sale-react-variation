@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { inputClasses} from '../../shared/helpers'
 import Input from '../shared/Input'
 import TextArea from '../shared/TextArea'
 import Button from '../shared/Button'
+import ProductForm from '../shared/Form'
 
 class NewProductForm extends Component {
     state= {
@@ -93,9 +93,8 @@ class NewProductForm extends Component {
               { title }
             </h1>
 
-            <div className="form-body-style px-5 pt-4">
-              <form className="form-horizontal" onSubmit={ this.handleSubmit }>
-                <Input
+            <ProductForm onSubmit={ this.handleSubmit }>
+            <Input
                   title="Name"
                   type="text"
                   name="name"
@@ -150,23 +149,23 @@ class NewProductForm extends Component {
                   autoFocus={ false }
                   state={ this.state }
                 />
-
                 <Button>
                    { buttonText }
                 </Button>
-
-
-
-              </form>
-            </div>
+            </ProductForm>
           </div>
         </div>
       </div>
     </div>
-
-
     )
   }
+}
+
+NewProductForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  serverErrors: PropTypes.array.isRequired,
+  saved: PropTypes.bool.isRequired,
+  onResetSaved: PropTypes.func.isRequired
 }
 
 export default NewProductForm
