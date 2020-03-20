@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Input from '../shared/Input'
-import TextArea from '../shared/TextArea'
-import Button from '../shared/Button'
-import ProductForm from '../shared/Form'
+import ProductForm from './ProductForm'
 
 class NewProductForm extends Component {
     state= {
@@ -93,66 +90,13 @@ class NewProductForm extends Component {
               { title }
             </h1>
 
-            <ProductForm onSubmit={ this.handleSubmit }>
-            <Input
-                  title="Name"
-                  type="text"
-                  name="name"
-                  value={ this.state.name }
-                  //onChange={ event => this.handleChange(event) }
-                  onChange={ this.handleChange }
-                  placeholder="Item name"
-                  autoFocus={ true }
-                  state={ this.state }
-                />
-
-                <Input
-                  title="Price"
-                  type="text"
-                  name="price"
-                  value={ this.state.price }
-                  onChange={ this.handleChange }
-                  placeholder="Item price"
-                  autoFocus={ false }
-                  state={ this.state }
-                />
-
-                <TextArea
-                  title="Description"
-                  name="description"
-                  value={ this.state.description }
-                  rows="5"
-                  onChange={ this.handleChange }
-                  placeholder="Item description"
-                  autoFocus={ false }
-                  state={ this.state }
-                />
-
-                <Input
-                  title="Quantity"
-                  type="number"
-                  name="quantity"
-                  value={ this.state.quantity }
-                  onChange={ this.handleChange }
-                  placeholder="Item quantity"
-                  autoFocus={ false }
-                  state={ this.state }
-                />
-
-                <Input
-                  title="Image"
-                  type="file"
-                  name="image"
-                  value={ this.state.image }
-                  onChange={ this.handleChange }
-                  placeholder="Item image"
-                  autoFocus={ false }
-                  state={ this.state }
-                />
-                <Button>
-                   { buttonText }
-                </Button>
-            </ProductForm>
+            <ProductForm 
+              onSubmit={ this.handleSubmit }
+              onChange={ this.handleChange }
+              state= { this.state }
+              buttonText={ buttonText }
+              />
+            
           </div>
         </div>
       </div>
@@ -161,11 +105,11 @@ class NewProductForm extends Component {
   }
 }
 
-NewProductForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  serverErrors: PropTypes.array.isRequired,
-  saved: PropTypes.bool.isRequired,
-  onResetSaved: PropTypes.func.isRequired
-}
+// NewProductForm.propTypes = {
+//   onSubmit: PropTypes.func.isRequired,
+//   serverErrors: PropTypes.array.isRequired,
+//   saved: PropTypes.bool.isRequired,
+//   onResetSaved: PropTypes.func.isRequired
+// }
 
 export default NewProductForm

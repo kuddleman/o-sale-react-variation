@@ -12,7 +12,7 @@ const TextArea = ( props ) => (
                       name={ props.name }
                       value={ props.value }
                       rows={ props.rows }
-                      onChange={ props.handleChange }
+                      onChange={ props.onChange }
                       // onBlur={ this.handleBlur }
                       id={ props.name } 
                       className={inputClasses(`${ props.name }`, props.state )} 

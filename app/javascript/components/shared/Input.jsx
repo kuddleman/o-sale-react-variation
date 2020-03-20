@@ -14,7 +14,7 @@ const Input = ( props ) => (
         type={ props.type }  
         name={ props.name } 
         value={ props.value }
-        onChange={ props.handleChange }
+        onChange={ props.onChange }
         // onBlur={ this.handleBlur }
         id={ props.name } 
         className={inputClasses(`${props.name}`, props.state )} 
