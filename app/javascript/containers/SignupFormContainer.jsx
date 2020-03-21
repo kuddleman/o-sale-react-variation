@@ -3,6 +3,7 @@ import Input from '../components/shared/Input'
 import Button from '../components/shared/Button'
 import SignUpForm from '../components/shared/Form'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 class Signup extends Component {
 
@@ -11,7 +12,9 @@ class Signup extends Component {
     lastname: '',
     email: '',
     password: '',
-    errors: ''
+    errors: {},
+    toHomePage: false
+   
   }
 
   handleChange = ( event ) => {
@@ -32,6 +35,14 @@ class Signup extends Component {
       }
     }
     this.handleSignup( newUser )
+    this.setState({
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
+      toHomePage: true
+    })
+
   }
 
   handleSignup = ( user ) => {
@@ -44,6 +55,9 @@ class Signup extends Component {
   }
 
   render() {
+    if (this.state.toHomePage) {
+      return <Redirect to="/" />
+    }
     return (
       <div className="container mt-4">
         <div className="row">
