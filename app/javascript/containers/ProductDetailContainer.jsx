@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 
 
 class ProductDetail extends React.Component {
@@ -9,11 +9,17 @@ class ProductDetail extends React.Component {
     super(props)
 
     this.state = {
-      product: {}
+      product: {},
+      editing: false,
+      updated: false
     }
   }
 
   componentDidMount() {
+    this.getProduct()
+  }
+
+  getProduct = () => {
     const id = this.props.match && this.props.match.params.id
      
     axios
@@ -22,6 +28,24 @@ class ProductDetail extends React.Component {
         this.setState({ product: response.data.product })
       })
       .catch( error => console.log(error))
+  }
+
+  componentDidUpdate = () => {
+    if ( this.state.editing && this.state.updated ) {
+      this.getProduct()
+    }
+  }
+
+  setUpdated = value => {
+  this.setState({ updated: value })
+  }
+
+  editingProduct = value => {
+    if (value === undefined) {
+      this.setState({ editing: true })
+    } else if ( value === "edited") {
+      this.setState({ editing: false })
+    }
   }
 
   isOwner = ( user, product) => {
@@ -64,19 +88,23 @@ class ProductDetail extends React.Component {
 
               <div className="btn-edit-del">
                 <Link 
-                  to={`/product/${id}/edit`} 
+                  to={`/products/${id}/edit`} 
                   className="btn btn-outline-purple btn-lg"
                 >
                   Edit
                 </Link>
-                <a href="#" className="btn btn-outline-purple btn-lg">Edit</a>
               </div>
             </React.Fragment> : null
-          }
-          
-          
+          }    
 
         </div>
+        <Route path="/products/:id/edit" render={ ( props ) => (
+          <EditProductForm 
+            {...props } 
+            onEdit={ this.editingProduct } 
+            onUpdate={ this.setUpdated }
+          />
+        )} />
       </div>
      </div> 
     )
