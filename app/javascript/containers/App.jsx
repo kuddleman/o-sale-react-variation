@@ -8,11 +8,16 @@ import ProductDetail from './ProductDetailContainer'
 // import NewProductForm from '../components/products/NewProductForm'
 import Footer from '../components/shared/Footer'
 import Signup from './SignupFormContainer'
+import Signin from './SigninFormContainer'
 
 class App extends Component {
 
   state = {
     currentUser: null
+  }
+
+  componentDidMount = () => {
+    this.fetchCurrentUser()
   }
 
   fetchCurrentUser = () => {
@@ -29,18 +34,39 @@ class App extends Component {
     this.setState( { currentUser })
   }
 
+  handleSignout = (event) => {
+    event.preventDefault()
+    axios
+      .delete('/api/v1/signout.json')
+      .then(response => {
+        this.setState({ currentUser: null})
+      })
+      .catch(error => console.log(error.response))
+  }
+
 
   render() {
     return (
       <BrowserRouter>
       <React.Fragment>
-        <Header />
+        <Header 
+          currentUser={ this.state.currentUser }
+          onSignout={this.handleSignOut}
+        />
         <Switch>
           <Route exact path='/' component={ ProductList }/>
-          <Route path='/products/:id' component={ ProductDetail } />
+          <Route path='/products/:id' render={ (props) => (
+            <ProductDetail 
+              {...props}
+              currentUser={ this.state.currentUser }
+            />
+          )} />
           <Route path='/register' render={() => (
-            <Signup onFetchCurrentUser={ this.fetchCurrentUser} />
+            <Signup onFetchCurrentUser={ this.fetchCurrentUser} 
+             currentUser={ this.state.currentUser }
+            />
           )}/>
+          <Route path= '/login' component={ Signin } />
           <Route render={() => (
             <div className="container">
               <div className="row">

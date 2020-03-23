@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 
 class ProductDetail extends React.Component {
@@ -13,7 +14,7 @@ class ProductDetail extends React.Component {
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id
+    const id = this.props.match && this.props.match.params.id
      
     axios
       .get(`/api/v1/products/${id}.json`) 
@@ -23,10 +24,19 @@ class ProductDetail extends React.Component {
       .catch( error => console.log(error))
   }
 
+  isOwner = ( user, product) => {
+    if (Object.keys(product).length > 0) {
+      return user && user.id === product.user.id
+    }
+    return false
+  }
+
   
 
   render() {
+    const id = this.props.match && this.props.match.params.id
     const { product } = this.state
+    const { currentUser} = this.props
     return (
       <div className="container">
       <div className="row">
@@ -46,13 +56,26 @@ class ProductDetail extends React.Component {
             { product.description }
           </div>
 
-          <div className="float-right btn-edit-del">
-            <a href="#" className="btn btn-outline-danger btn-lg">Delete</a>
-          </div>
+          { this.isOwner( currentUser ,product ) ?
+            <React.Fragment>
+              <div className="float-right btn-edit-del">
+                <a href="#" className="btn btn-outline-danger btn-lg">Delete</a>
+              </div>
 
-          <div className="btn-edit-del">
-            <a href="#" className="btn btn-outline-purple btn-lg">Edit</a>
-          </div>
+              <div className="btn-edit-del">
+                <Link 
+                  to={`/product/${id}/edit`} 
+                  className="btn btn-outline-purple btn-lg"
+                >
+                  Edit
+                </Link>
+                <a href="#" className="btn btn-outline-purple btn-lg">Edit</a>
+              </div>
+            </React.Fragment> : null
+          }
+          
+          
+
         </div>
       </div>
      </div> 

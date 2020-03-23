@@ -54,8 +54,14 @@ class Signup extends Component {
       .catch( error => console.log( error ) )
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+    const fieldNames = ["firstname", "lastname", "email", "password"]
+    //verifyAndSetFieldErrors(this, fieldNames)
+  }
+
   render() {
-    if (this.state.toHomePage) {
+    if (this.state.toHomePage || this.props.currentUser) {
       return <Redirect to="/" />
     }
     return (
