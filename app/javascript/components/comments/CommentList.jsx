@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Comment from './Comment'
+import CommentForm from './CommentForm'
 
 class CommentList extends Component {
   render() {
@@ -11,6 +12,12 @@ class CommentList extends Component {
     if (!comments || comments.length === 0) {
       return (
         <div className="container">
+          <CommentForm 
+            onCommentSubmit={ this.props.onCommentSubmit}
+            saved={ this.props.saved }
+            onResetSaved = { this.props.onResetSaved }
+          
+          />
           <div className="row">
             <div className="col-md-10 offset-md-1 mt-4">
               <h2 className="comment-header text-center">

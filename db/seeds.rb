@@ -49,3 +49,9 @@ products = Product.create([
     user_id: jane.id
   }
 ])
+
+comment = Comment.create!(
+  body: 'Super cool thingamajig!',
+  product: products.first,
+  user: john
+)

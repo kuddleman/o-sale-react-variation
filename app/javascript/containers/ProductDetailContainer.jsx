@@ -17,6 +17,7 @@ class ProductDetail extends React.Component {
       editing: false,
       updated: false,
       comments: [],
+      saved: false,
     }
   }
 
@@ -73,6 +74,17 @@ class ProductDetail extends React.Component {
     return false
   }
 
+  handleCommentSubmit = data => {
+    const id = +this.props.match.params.id
+    axios
+      .post(`/api/v1/products/${id/coments/json}`, data)
+      .then( response => {
+        const comments = [ response.data.comment, ...this.state.comments ]
+        this.setState( { comments })
+      })
+      
+  }
+
   handleDelete = (event) => {
     event.preventDefault()
     this.handleProductDelete(this.props.match.params.id)
@@ -85,6 +97,12 @@ class ProductDetail extends React.Component {
         this.props.history.push('/')
       })
       .catch(error => console.log(error))
+  }
+
+  resetSaved = () => {
+    this.setSate({
+      saved: false
+    })
   }
 
   render() {
@@ -153,7 +171,12 @@ class ProductDetail extends React.Component {
         </div>
         <hr />
         {!this.state.editing ?
-          <CommentList comments={this.state.comments} /> : null
+          <CommentList 
+          comments={this.state.comments} 
+          onCommentSubmit={ this.handleCommentSubmit }
+          saved={ this.state.saved }
+          onResetSaved={ this.resetSaved }
+          /> : null
         }
         
       </div>
