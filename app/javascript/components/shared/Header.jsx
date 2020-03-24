@@ -26,7 +26,8 @@ const Header = ({ currentUser, onSignout }) => (
              <Link to='/register' className='nav-link'>Sign Up</Link>
           </li>
           <li className="nav-item">
-             <a href="#" onClick={onSignout} className='nav-link'>Sign Out</a>
+             <Link to='/' className='nav-link'>Sign Out</Link>
+             {/* <a href="" onClick={onSignout} className='nav-link'>Sign Out</a> */}
           </li>
           {
             currentUser ?

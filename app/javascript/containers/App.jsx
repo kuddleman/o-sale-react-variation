@@ -24,6 +24,7 @@ class App extends Component {
     axios
       .get('/api/v1/users/get_current_user.json')
       .then( response => {
+        console.log( response )
         let currentUser = response.data.currentUser || null
         this.setCurrentUser( currentUser)
       })

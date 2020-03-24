@@ -55,6 +55,20 @@ class ProductDetail extends React.Component {
     return false
   }
 
+  handleDelete = event => {
+    event.preventDefault()
+    this.handleProductDelete(this.props.match.params.id)
+  }
+
+  handleProductDelete= id => {
+    axios
+      .delete(`/api/v1/products/${ id.json }`)
+      .then( response => {
+        this.props.history.push('/')
+      })
+      .catch( error => console.log( error ))
+  }
+
   
 
   render() {
@@ -83,7 +97,12 @@ class ProductDetail extends React.Component {
           { this.isOwner( currentUser ,product ) ?
             <React.Fragment>
               <div className="float-right btn-edit-del">
-                <a href="#" className="btn btn-outline-danger btn-lg">Delete</a>
+                <a 
+                  href="#"
+                  onClick={ this.handleDelete }
+                  className="btn btn-outline-danger btn-lg">
+                  Delete
+                </a>
               </div>
 
               <div className="btn-edit-del">

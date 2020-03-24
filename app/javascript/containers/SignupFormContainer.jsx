@@ -49,16 +49,17 @@ class Signup extends Component {
     axios
       .post('api/v1/users/json', user)
       .then( response => {
+        console.log("sign up handler", response )
         this.props.onFetchCurrentUser()
       })
       .catch( error => console.log( error ) )
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    const fieldNames = ["firstname", "lastname", "email", "password"]
-    //verifyAndSetFieldErrors(this, fieldNames)
-  }
+  // handleSubmit = (event) => {
+  //   event.preventDefault()
+  //   const fieldNames = ["firstname", "lastname", "email", "password"]
+  //   //verifyAndSetFieldErrors(this, fieldNames)
+  // }
 
   render() {
     if (this.state.toHomePage || this.props.currentUser) {

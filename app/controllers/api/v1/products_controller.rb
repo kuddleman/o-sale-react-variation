@@ -16,23 +16,21 @@ class Api::V1::ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.user = current_user
     unless @product.save
-      render json: @product.errors.full_messages,status: :unprocessable_entity
+      render json: @product.errors.full_messages,
+        status: :unprocessable_entity
     end
   end
 
   def update
-    if @product.update(product_params)
-      flash[:notice] = "Product has been updated"
-      redirect_to root_path
-    else
-      flash.now[:alert] = "Product has not been updated"
-      render :edit
+    unless @product.update(product_params)
+      render json: @product.errors.full_messages,
+        status: :unprocessable_entity
     end
+      
   end
 
   def destroy
     @product.destroy
-    redirect_to root_path
   end
 
   private
