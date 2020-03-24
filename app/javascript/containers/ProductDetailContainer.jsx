@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { Link, Route } from 'react-router-dom'
+import NewProductForm from '../components/products/NewProductForm'
+import CommentsList from '../components/comments/CommentList'
 
 
 class ProductDetail extends React.Component {
@@ -11,7 +13,8 @@ class ProductDetail extends React.Component {
     this.state = {
       product: {},
       editing: false,
-      updated: false
+      updated: false,
+      comments: []
     }
   }
 
@@ -125,6 +128,8 @@ class ProductDetail extends React.Component {
           />
         )} />
       </div>
+      <hr />
+      <CommentList comments={ this.state.comments } />
      </div> 
     )
   }  
