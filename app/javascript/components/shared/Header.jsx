@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Header = ({ currentUser, onSignout }) => (
   <nav className="navbar navbar-expand-lg navbar-light ">
-      <Link to='/' className='navbar-brand goog'>O-Sale</Link>
+      <Link to='/' className='navbar-brand goog'>Donny-Sale</Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
