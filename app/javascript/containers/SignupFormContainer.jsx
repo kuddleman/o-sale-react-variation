@@ -4,6 +4,7 @@ import Button from '../components/shared/Button'
 import SignUpForm from '../components/shared/Form'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
+// import { withRouter } from 'react-router-dom';
 
 class Signup extends Component {
 
@@ -47,7 +48,8 @@ class Signup extends Component {
 
   handleSignup = ( user ) => {
     axios
-      .post('api/v1/users/json', user)
+      // .post('api/v1/users/json', user)
+      .post('api/v1/users', user)
       .then( response => {
         console.log("sign up handler", response )
         this.props.onFetchCurrentUser()

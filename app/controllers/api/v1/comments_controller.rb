@@ -3,17 +3,21 @@ class Api::V1::CommentsController < ApplicationController
   before_action :set_product
 
   def index
+   
     @comments = @product.comments if @product
+    render json: @comments
   end
 
   def create
-    @comment = @product.comments.build(comment_params)
-    @comment.user = current_user
+    render json: @product
 
-    unless @comment.save
-      render json: @comment.errors.full_messages,
-        status: : uprocessable_entity
-    end
+    # @comment = @product.comments.build(comment_params)
+    # @comment.user = current_user
+
+    # unless @comment.save
+    #   render json: @comment.errors.full_messages,
+    #     status: : uprocessable_entity
+    # end
   end
 
   private

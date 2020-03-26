@@ -32,25 +32,26 @@ class ProductDetail extends React.Component {
   }
 
   getProductAndComments = () => {
+  
     const id = this.props.match && this.props.match.params.id
 
     if (id) {
       axios
         .all([
-          axios.get(`/api/v1/products/${id}.json`),
-          axios.get(`/api/v1/products/${id}/comments.json`)
+          axios.get(`/api/v1/products/${id}`),
+          axios.get(`/api/v1/products/${id}/comments`)
         ])
         .then(axios.spread((productResponse, commentsResponse) => {
           this.setState({
-            product: productResponse.data.product,
-            comments: commentsResponse.data.comments
+            product: productResponse.data,
+            comments: commentsResponse.data
           })
         }))
         .catch(error => {
-          this.props.history.push({
-            pathname: '/',
-            state: { error: error.response.data.error }
-        })
+        //   this.props.history.push({
+        //     pathname: '/',
+        //     state: { error: error.response.data.error }
+        // })
       })
     }
   }
@@ -106,6 +107,7 @@ class ProductDetail extends React.Component {
   }
 
   render() {
+    console.log("I am inside the render i product detail")
     const id = this.props.match && this.props.match.params.id
     const { product } = this.state
     const { currentUser } = this.props

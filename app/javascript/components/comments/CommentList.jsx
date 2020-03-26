@@ -4,6 +4,7 @@ import CommentForm from './CommentForm'
 
 class CommentList extends Component {
   render() {
+    
     const { comments } = this.props
     let commentList = null
 

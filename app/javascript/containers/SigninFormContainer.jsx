@@ -28,18 +28,24 @@ class Signin extends Component {
       email: this.state.email,
       password: this.state.password
     }
+    console.log("We are in HANDLE SUBMIT")
     this.handleSignin( user )
   }
 
   handleSignin = user => {
+    console.log("handleSign in BEFORE axios")
     axios
-     .post('/api/v1/siginin.json'.user)
+    //  .post('/api/v1/siginin.json'.user)
+     //.post('/api/v1/siginin.json',user)
+     .post('/api/v1/signin',user)
+
      .then( response => {
        this.setState({ toHomePage: true })
      })
      .catch(error => {
        console.log( error.response )
      })
+    console.log("handleSignin AFTER axios")
   }
 
 

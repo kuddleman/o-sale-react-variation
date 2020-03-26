@@ -20,7 +20,7 @@ class NewProductForm extends Component {
     const newProduct = {
       name,
       description,
-      price,
+      price: parseFloat(price),
       quantity
     }
     this.props.onSubmit( newProduct )

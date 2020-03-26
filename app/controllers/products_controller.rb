@@ -20,11 +20,13 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.user = current_user
     if @product.save
-      flash[:notice] = "Product has been saved"
-      redirect_to root_path
+      # flash[:notice] = "Product has been saved"
+      # redirect_to root_path
+      render plain: { hello: 'world' }.to_json, content_type: 'application/json'
     else
-      flash.now[:alert] = "Product has not been saved"
-      render :new
+      # flash.now[:alert] = "Product has not been saved"
+      # render :new
+      print "batman"
     end
   end
 

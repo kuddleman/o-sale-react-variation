@@ -10,12 +10,15 @@ class Api::V1::ProductsController < ApplicationController
   def show
     @comment = @product.comments.build
     @comments = @product.comments
+    render json: @product
   end
 
   def create
     @product = Product.new(product_params)
     @product.user = current_user
-    unless @product.save
+    if @product.save
+      render json: @product
+    else
       render json: @product.errors.full_messages,
         status: :unprocessable_entity
     end
@@ -44,6 +47,7 @@ class Api::V1::ProductsController < ApplicationController
 
   def find_product
     begin
+      
       @product = Product.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       render json: {

@@ -13,7 +13,7 @@ const Comment = ({ comment }) => (
         { moment(comment.created_at).startOf('minute').fromNow() }
       </span> by:&nbsp;
     </em>
-    { comment.user.fullname }
+    {/* { comment.user.fullname } */}
   </small>
 </div>
 

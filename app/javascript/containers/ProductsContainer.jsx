@@ -33,10 +33,11 @@ class ProductList extends React.Component {
       product: {...data }
     }
     axios
-      .post('/api/v1/products.json', newProduct)
+      .post('/api/v1/products', newProduct)
       .then(response => {
         // const newProducts = this.state.products.concat(response.data.product)
-        const newProducts = [ ...this.state.products, response.data.product ]
+        console.log("response from handleProductsSubmit", response)
+        const newProducts = [ ...this.state.products, response.data ]
         this.setState({ products: newProducts })
       })
       .catch(error => console.log(error))
