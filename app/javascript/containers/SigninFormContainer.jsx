@@ -33,19 +33,22 @@ class Signin extends Component {
   }
 
   handleSignin = user => {
-    console.log("handleSign in BEFORE axios")
+  
     axios
     //  .post('/api/v1/siginin.json'.user)
      //.post('/api/v1/siginin.json',user)
      .post('/api/v1/signin',user)
 
      .then( response => {
+      
+        this.props.onFetchCurrentUser()
+      
        this.setState({ toHomePage: true })
      })
      .catch(error => {
        console.log( error.response )
      })
-    console.log("handleSignin AFTER axios")
+    
   }
 
 

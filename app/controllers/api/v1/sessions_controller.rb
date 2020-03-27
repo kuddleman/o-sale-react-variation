@@ -14,7 +14,7 @@ class Api::V1::SessionsController < ApplicationController
 
   def destroy
     cookies.delete :user_id
-    flash[:notice] = "You have been signed out"
-    redirect_to root_path
+    # redirect_to root_path
+    render json: { message: "You have been signed out" }
   end
 end

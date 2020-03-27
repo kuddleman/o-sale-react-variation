@@ -28,7 +28,7 @@ class ProductList extends React.Component {
   }
 
   handleProductSubmit = data => {
-    console.log("Submitted in Product List!")
+    
     const newProduct = {
       product: {...data }
     }
@@ -36,7 +36,7 @@ class ProductList extends React.Component {
       .post('/api/v1/products', newProduct)
       .then(response => {
         // const newProducts = this.state.products.concat(response.data.product)
-        console.log("response from handleProductsSubmit", response)
+        
         const newProducts = [ ...this.state.products, response.data ]
         this.setState({ products: newProducts })
       })

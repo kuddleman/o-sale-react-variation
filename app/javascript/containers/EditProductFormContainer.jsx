@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 
 import ProductForm from '../components/products/ProductForm'
@@ -14,7 +14,6 @@ class EditProductForm extends Component {
 
 componentDidMount = () => {
   const id = this.props.match && +this.props.match.params.id
-
   if (id) {
     this.getProduct(id)
   }
@@ -29,13 +28,15 @@ componentWillUnmount = () => {
 }
 
 getProduct = id => {
+  console.log("getPRODUCT is being called")
   axios
-  .get(`/api/v1/products/${id}.json`)
+  .get(`/api/v1/products/${id}`)
   .then( response => {
-    const product = response.data.product
+    const product = response.data
+    console.log("This is the FIRST PRODUCT:", product)
     const idx = product.price.search(/\d/)
     product.price = product.price.slice( idx )
-
+    console.log("This is the PRODUCT:", product)
     this.setState({
       id: product.id,
       name: product.name,
@@ -73,26 +74,26 @@ handleSubmit = event => {
   }
 
   this.handleProductUpdate( editedProduct )
-
+   
 }
 
-handleProductUpdate = () => {
+handleProductUpdate = (data) => {
   const updatedProduct = {
     product: { ...data }
   }
 
   axios
-    .put(`/api/v1/products/${data.id}.json`, updatedProduct )
+    .put(`/api/v1/products/${data.id}`, updatedProduct )
     .then( response => {
       const { product } = response.data
       this.setState({
         ...product,
         serverErrors: [],
         saved: true
-      }), () => {
-        this.props.onUpdate(true)
-        this.props.history.push(`/products/${ data.id }`)
-      }
+      })
+      this.props.onUpdate(true)
+      this.props.history.push(`/products/${ data.id }`)
+      
     })
     .catch( error => {
       const updatedErrors = [

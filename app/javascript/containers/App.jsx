@@ -22,10 +22,10 @@ class App extends Component {
 
   fetchCurrentUser = () => {
     axios
-      .get('/api/v1/users/get_current_user.json')
+      .get('/api/v1/users/get_current_user')
       .then( response => {
         console.log( response )
-        let currentUser = response.data.currentUser || null
+        let currentUser = response.data || null
         this.setCurrentUser( currentUser)
       })
       .catch( error => console.log( error.response.data ))
@@ -52,6 +52,7 @@ class App extends Component {
       <React.Fragment>
         <Header 
           currentUser={ this.state.currentUser }
+          onFetchCurrentUser={ this.fetchCurrentUser} 
           onSignout={this.handleSignOut}
         />
         <Switch>
@@ -67,7 +68,11 @@ class App extends Component {
              currentUser={ this.state.currentUser }
             />
           )}/>
-          <Route path= '/login' component={ Signin } />
+          <Route path= '/login' render={() => (
+            <Signin onFetchCurrentUser={ this.fetchCurrentUser} 
+             
+            />
+          )} />
           <Route render={() => (
             <div className="container">
               <div className="row">

@@ -5,7 +5,8 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 import { Link, Route } from 'react-router-dom'
 
-import NewProductForm from '../components/products/NewProductForm'
+ //import NewProductForm from '../components/products/NewProductForm'
+ import EditProductFormContainer from './EditProductFormContainer'
 import CommentList from '../components/comments/CommentList'
 
 class ProductDetail extends React.Component {
@@ -93,7 +94,7 @@ class ProductDetail extends React.Component {
 
   handleProductDelete = (id) => {
     axios
-      .delete(`/api/v1/products/${id}.json`)
+      .delete(`/api/v1/products/${id}`)
       .then(response => {
         this.props.history.push('/')
       })
@@ -107,12 +108,12 @@ class ProductDetail extends React.Component {
   }
 
   render() {
-    console.log("I am inside the render i product detail")
+    
     const id = this.props.match && this.props.match.params.id
     const { product } = this.state
     const { currentUser } = this.props
-
-    console.log(this.props)
+    
+    console.log("this is the productDetailContainer", currentUser, product)
 
     return (
       <div className="container">
@@ -162,7 +163,7 @@ class ProductDetail extends React.Component {
           </div>
           {this.isOwner(currentUser, product) ?
             <Route path="/products/:id/edit" render={(props) => (
-              <NewProductForm 
+              <EditProductFormContainer 
                 {...props} 
                 onEdit={this.editingProduct} 
                 onUpdate={this.setUpdated} 

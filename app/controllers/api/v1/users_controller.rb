@@ -14,7 +14,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def get_current_user
-    current_user
+    render json: current_user
   end
 
   private

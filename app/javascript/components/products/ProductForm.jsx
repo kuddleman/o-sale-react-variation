@@ -7,6 +7,7 @@ import Button from '../shared/Button'
 import Form from '../shared/Form'
 
 const ProductForm = props => (
+   
    <Form onSubmit={ props.onSubmit }>
       <Input
         title="Name"
