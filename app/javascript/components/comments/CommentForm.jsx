@@ -5,6 +5,7 @@ import TextArea from '../shared/TextArea'
 import Button from '../shared/Button'
 import Form from '../shared/Form'
 import { verifyAndSetFieldErrors } from '../../shared/helpers'
+import axios from 'axios'
 
 class CommentForm extends Component {
   state = {
@@ -13,7 +14,9 @@ class CommentForm extends Component {
   }
 
   handleSubmit = (event) => {
+    console.log("This is the handleSubmit function!")
     event.preventDefault()
+    this.props.onCommentSubmit(this.state)
   }
 
   handleChange = (event) => {
@@ -24,6 +27,7 @@ class CommentForm extends Component {
  
 
   render() {
+    
     return (
       <div className="container mt-4">
         <div className="row">

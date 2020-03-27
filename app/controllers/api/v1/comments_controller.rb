@@ -9,15 +9,19 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def create
-    render json: @product
+    
+    @comment = @product.comments.build(comment_params)
+    @comment.user = current_user
 
-    # @comment = @product.comments.build(comment_params)
-    # @comment.user = current_user
-
+    if @comment.save
+      render json: @comment
+    else
+      render json: @comment.errors.full_messages,
+        status: :unprocessable_entity
     # unless @comment.save
     #   render json: @comment.errors.full_messages,
     #     status: : uprocessable_entity
-    # end
+    end
   end
 
   private

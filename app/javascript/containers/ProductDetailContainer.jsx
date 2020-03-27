@@ -79,9 +79,10 @@ class ProductDetail extends React.Component {
   handleCommentSubmit = data => {
     const id = +this.props.match.params.id
     axios
-      .post(`/api/v1/products/${id/coments/json}`, data)
+       
+      .post(`/api/v1/products/${id}/comments`, data)
       .then( response => {
-        const comments = [ response.data.comment, ...this.state.comments ]
+        const comments = [ response.data, ...this.state.comments ]
         this.setState( { comments })
       })
       
